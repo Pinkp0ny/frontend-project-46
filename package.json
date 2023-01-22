@@ -4,7 +4,7 @@
   "description": "[![Actions Status](https://github.com/Pinkp0ny/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/Pinkp0ny/frontend-project-46/actions)",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
     "gendiff": "bin/gendiff.js"
   },
   "dependencies": {
+    "@jest/globals": "^29.3.1",
     "commander": "^10.0.0",
     "lodash": "^4.17.21",
     "path": "^0.12.7"
@@ -28,6 +29,7 @@
   "devDependencies": {
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.27.4"
+    "eslint-plugin-import": "^2.27.4",
+    "jest": "^29.3.1"
   }
 }

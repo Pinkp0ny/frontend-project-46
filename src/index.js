@@ -1,10 +1,9 @@
 import _ from 'lodash';
-import path from 'path';
-import fs from 'fs';
+import parse from './parsers.js';
 
 export default (filePath1, filePath2) => {
-  const parsedFile1 = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), filePath1)));
-  const parsedFile2 = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), filePath2)));
+  const parsedFile1 = parse(filePath1);
+  const parsedFile2 = parse(filePath2);
   const gendiff = (object1, object2) => {
     const keys1 = _.sortBy(Object.keys(object1));
     const result = {};
@@ -15,8 +14,8 @@ export default (filePath1, filePath2) => {
       } else if (object1[key1] === object2[key1]) {
         result[`${key1}`] = object1[key1];
       } else {
-        result[`+${key1}`] = object1[key1];
-        result[`-${key1}`] = object2[key1];
+        result[`+${key1}`] = object2[key1];
+        result[`-${key1}`] = object1[key1];
       }
     }
 

@@ -1,33 +1,20 @@
-import _ from 'lodash';
+import fs from 'fs';
+import path from 'path';
 import parse from './parsers.js';
+import buildTree from './buildTree.js';
+import makeStylish from './stylish.js';
 
-export default (filePath1, filePath2) => {
-  const parsedFile1 = parse(filePath1);
-  const parsedFile2 = parse(filePath2);
-  const gendiff = (object1, object2) => {
-    const keys1 = _.sortBy(Object.keys(object1));
-    const result = {};
-    for (let i = 0; i < keys1.length; i += 1) {
-      const key1 = keys1[i];
-      if (!object2[key1]) {
-        result[`-${key1}`] = object1[key1];
-      } else if (object1[key1] === object2[key1]) {
-        result[`${key1}`] = object1[key1];
-      } else {
-        result[`+${key1}`] = object2[key1];
-        result[`-${key1}`] = object1[key1];
-      }
-    }
-
-    const keys2 = _.sortBy(Object.keys(object2));
-    for (let i = 0; i < keys2.length; i += 1) {
-      const key2 = keys2[i];
-      if (!object1[key2]) {
-        result[`-${key2}`] = object2[key2];
-      }
-    }
-    return result;
-  };
-  const diff = gendiff(parsedFile1, parsedFile2);
-  return (diff);
+const getFileContent = (file) => {
+  const currentFilepath = path.resolve(process.cwd(), file);
+  const extension = path.extname(currentFilepath);
+  const fileContent = fs.readFileSync(currentFilepath, 'utf-8');
+  return parse(fileContent, extension);
 };
+
+const gendiff = (filePath1, filePath2) => {
+  const file1 = getFileContent(filePath1);
+  const file2 = getFileContent(filePath2);
+  const diffInfo = buildTree(file1, file2);
+  return makeStylish(diffInfo);
+};
+export default gendiff;

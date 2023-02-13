@@ -14,7 +14,6 @@ const stringify = (value) => {
 };
 
 const makePlain = (diff) => {
-  const property = 'Property \'';
   const iter = (property, parent) => {
     const tree = parent.map((node) => {
       switch (node.type) {
@@ -35,6 +34,7 @@ const makePlain = (diff) => {
     const result = _.compact(tree);
     return `${result.join('\n')}`;
   };
+  const property = 'Property \'';
   return iter(property, diff);
 };
 

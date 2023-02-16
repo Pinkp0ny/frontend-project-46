@@ -15,7 +15,7 @@ const stringify = (value) => {
 
 const makePlain = (diff) => {
   const iter = (property, parent) => {
-    const tree = parent.map((node) => {
+    const tree = parent.flatMap((node) => {
       switch (node.type) {
         case 'added':
           return `${property}${node.key}' was added with value: ${stringify(node.value)}`;

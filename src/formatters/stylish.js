@@ -1,9 +1,10 @@
+import _ from 'lodash';
+
 const indent = (depth, spaceCount = 4) => ' '.repeat(spaceCount * depth - 2);
 const stringify = (data, treeDepth) => {
-  if (typeof data !== 'object') {
+  if (!_.isObject(data)) {
     return `${data}`;
   }
-  if (data === null) { return null; }
   const lines = Object
     .entries(data)
     .map(([key, value]) => `${indent(treeDepth + 1)}  ${key}: ${stringify(value, treeDepth + 1)}`);

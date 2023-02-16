@@ -9,18 +9,13 @@ const __dirname = path.dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
-test('stylish gendiff', () => {
-  const first = getFixturePath('file1.json');
-  const second = getFixturePath('file2.json');
-  expect(gendiff(first, second, 'stylish')).toEqual(stylishResult);
-});
-test('plain gendiff', () => {
-  const first = getFixturePath('file1.json');
-  const second = getFixturePath('file2.json');
-  expect(gendiff(first, second, 'plain')).toEqual(plainResult);
-});
-test('json gendiff', () => {
-  const first = getFixturePath('file1.json');
-  const second = getFixturePath('file2.json');
-  expect(gendiff(first, second, 'json')).toEqual(jsonResult);
+test.each([
+  ['file1.json', 'file2.json', 'stylish', stylishResult],
+  ['file1.json', 'file2.json', 'plain', plainResult],
+  ['file1.json', 'file2.json', 'json', jsonResult],
+  ['file1.yaml', 'file2.yaml', undefined, stylishResult],
+  ['file1.yaml', 'file2.yaml', 'plain', plainResult],
+  ['file1.yaml', 'file2.yaml', 'json', jsonResult],
+])('diff', (filePath1, filePath2, format, result) => {
+  expect(gendiff(getFixturePath(filePath1), getFixturePath(filePath2), format)).toEqual(result);
 });

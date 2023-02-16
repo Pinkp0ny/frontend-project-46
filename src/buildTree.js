@@ -10,7 +10,7 @@ const buildTree = (data1, data2) => {
     if (!_.has(data1, key)) {
       return { type: 'added', key, value: data2[key] };
     }
-    if (_.isObject(data1[key]) && _.isObject(data2[key])) {
+    if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
       return { type: 'nested', key, children: buildTree(data1[key], data2[key]) };
     }
     if (!_.isEqual(data1[key], data2[key])) {

@@ -1,5 +1,5 @@
 const stylishResult = `{
-   common: {
+    common: {
       + follow: false
         setting1: Value 1
       - setting2: 200
@@ -9,8 +9,8 @@ const stylishResult = `{
       + setting5: {
             key5: value5
         }
-       setting6: {
-           doge: {
+        setting6: {
+            doge: {
               - wow: 
               + wow: so much
             }
@@ -18,7 +18,7 @@ const stylishResult = `{
           + ops: vops
         }
     }
-   group1: {
+    group1: {
       - baz: bas
       + baz: bars
         foo: bar

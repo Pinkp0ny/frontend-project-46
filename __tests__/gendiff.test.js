@@ -16,6 +16,6 @@ test.each([
   ['file1.yaml', 'file2.yaml', stylishResult, undefined],
   ['file1.yaml', 'file2.yaml', plainResult, 'plain'],
   ['file1.yaml', 'file2.yaml', jsonResult, 'json'],
-])('Compare %s and %s to expect %s in "%s" style', (filePath1, filePath2, result, format) => {
+])('1', (filePath1, filePath2, result, format) => {
   expect(gendiff(getFixturePath(filePath1), getFixturePath(filePath2), format)).toEqual(result);
 });

@@ -15,9 +15,9 @@ const getFileContent = (file) => {
 };
 
 const gendiff = (filePath1, filePath2, formatName = 'stylish') => {
-  const fileContent1 = getFileContent(filePath1);
-  const fileContent2 = getFileContent(filePath2);
-  const diffTree = buildTree(fileContent1, fileContent2);
+  const data1 = getFileContent(filePath1);
+  const data2 = getFileContent(filePath2);
+  const diffTree = buildTree(data1, data2);
   return format(diffTree, formatName);
 };
 export default gendiff;

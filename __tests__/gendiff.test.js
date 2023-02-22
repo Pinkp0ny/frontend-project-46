@@ -17,7 +17,7 @@ describe.each([
   ['yaml', 'plain', plainResult],
   ['yaml', 'json', jsonResult],
 ])('gendiff, %s, format: %s', (ext, format, result) => {
-  test('', () => {
+  test('1', () => {
     const filePath1 = getFixturePath(`file1.${ext}`);
     const filePath2 = getFixturePath(`file2.${ext}`);
     expect(gendiff(filePath1, filePath2, format)).toEqual(result);

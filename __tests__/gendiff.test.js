@@ -10,16 +10,29 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 
 describe.each([
-  ['json', 'plain', plainResult],
-  ['json', 'stylish', stylishResult],
-  ['json', 'json', jsonResult],
-  ['yaml', undefined, stylishResult],
-  ['yaml', 'plain', plainResult],
-  ['yaml', 'json', jsonResult],
-])('gendiff, %s, format: %s', (ext, format, result) => {
-  test('1', () => {
+  ['json'],
+  ['stylish'],
+  ['plain'],
+  [undefined]
+])('%s formatter', (format) => {
+  test.each([
+    ['json'],
+    ['yaml'],
+  ])('%s files', (ext) => {
     const filePath1 = getFixturePath(`file1.${ext}`);
     const filePath2 = getFixturePath(`file2.${ext}`);
-    expect(gendiff(filePath1, filePath2, format)).toEqual(result);
+    switch (format) {
+      case 'json':
+        expect(gendiff(filePath1, filePath2, format)).toEqual(jsonResult);
+        break;
+      case 'stylish':
+        expect(gendiff(filePath1, filePath2, format)).toEqual(stylishResult);
+        break;
+      case 'plain':
+        expect(gendiff(filePath1, filePath2, format)).toEqual(plainResult);
+        break;
+      default:
+        expect(gendiff(filePath1, filePath2, format)).toEqual(stylishResult);
+    }
   });
 });

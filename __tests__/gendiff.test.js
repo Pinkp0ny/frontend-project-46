@@ -13,7 +13,7 @@ describe.each([
   ['json'],
   ['stylish'],
   ['plain'],
-  [undefined]
+  [undefined],
 ])('%s formatter', (format) => {
   test.each([
     ['json'],

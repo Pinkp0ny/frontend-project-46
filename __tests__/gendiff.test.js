@@ -31,6 +31,9 @@ describe.each([
       case 'plain':
         expect(gendiff(filePath1, filePath2, format)).toEqual(plainResult);
         break;
+      case undefined:
+        expect(gendiff(filePath1, filePath2, format)).toEqual(stylishResult);
+        break;
       default:
         expect(gendiff(filePath1, filePath2, format)).toEqual(stylishResult);
     }
